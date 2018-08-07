@@ -172,5 +172,3 @@ class Blockdestroyer {
 		}
 	}
 }
-
-export default Blockdestroyer;

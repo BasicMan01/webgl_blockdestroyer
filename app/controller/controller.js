@@ -1,12 +1,23 @@
-import Blockdestroyer from "../model/blockdestroyer.js";
-import View from "../view/view2D.js";
-
 var Controller = (function() {
+	'use strict';
+
 	var Controller = function() {
 		var self = this;
+		var urlParams = new URLSearchParams(window.location.search);
 
 		this.model = new Blockdestroyer({sizeX: 10, sizeY: 10});
-		this.view = new View(this.model);
+
+		if (urlParams.get('mode') === '3D') {
+			this.view = new View3D(this.model);
+
+			document.getElementById('tab2D').className = 'tab';
+			document.getElementById('tab3D').className = 'tab active';
+		} else {
+			this.view = new View2D(this.model);
+
+			document.getElementById('tab2D').className = 'tab active';
+			document.getElementById('tab3D').className = 'tab';
+		}
 
 		this.view.bindHandler('newGame', function() {
 			self.newGame();
@@ -16,12 +27,12 @@ var Controller = (function() {
 			self.triggerBlock(x, y);
 		});
 
-		this.view.render();
+		this.view.show();
 	};
 
 	Controller.prototype.newGame = function() {
 		this.model.newGame();
-		this.view.render();
+		this.view.show();
 	};
 
 	Controller.prototype.triggerBlock = function(x, y) {
@@ -31,10 +42,8 @@ var Controller = (function() {
 			this.model.triggerBlock(parseInt(x), parseInt(y));
 		}
 
-		this.view.render();
+		this.view.show();
 	};
 
 	return Controller;
-})();
-
-export default Controller;
+}());

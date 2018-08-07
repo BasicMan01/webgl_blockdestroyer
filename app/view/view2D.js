@@ -1,4 +1,6 @@
-var View = (function() {
+var View2D = (function() {
+	'use strict';
+
 	var View = function(model) {
 		this.model = model;
 
@@ -6,6 +8,14 @@ var View = (function() {
 
 		this.buttonNewGame = document.getElementById('newGame');
 		this.gameArea = document.getElementById('gameArea');
+
+		document.getElementById('tab2D').addEventListener('click', function() {
+			window.location.href = '?mode=2D';
+		});
+
+		document.getElementById('tab3D').addEventListener('click', function() {
+			window.location.href = '?mode=3D';
+		});
 	};
 
 	View.prototype.bindHandler = function(action, handler) {
@@ -32,7 +42,7 @@ var View = (function() {
 		}
 	};
 
-	View.prototype.render = function() {
+	View.prototype.show = function() {
 		var html = [];
 
 		html[html.length] = "<table cellspacing='0' cellpadding='0' border='1'>";
@@ -59,9 +69,7 @@ var View = (function() {
 		} else {
 			document.getElementById('gameOver').innerHTML = '';
 		}
-	}
+	};
 
 	return View;
-})();
-
-export default View;
+}());

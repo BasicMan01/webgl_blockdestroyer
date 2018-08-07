@@ -3,44 +3,57 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="stylesheet" type="text/css" href="resources/css/global.css">
 	</head>
 
 	<body>
-		<table cellspacing="0" cellpadding="0" border="0" style="font-family:Arial; cursor:default;">
-			<tr>
-				<td id="gameArea">
-				</td>
+		<div class="tab-container">
+			<div id="tab2D" class="tab active">2D</div>
+			<div id="tab3D" class="tab">3D</div>
+		</div>
 
-				<td style="vertical-align:top;width:120px;padding-left:10px;">
-					<table cellspacing="0" cellpadding="0" border='0' style="width:100%;height:100%;font-size:12px; font-weight:bold;">
+		<table >
+			<tr>
+				<td id="gameArea"></td>
+				<td id="gameInfo" class="panel-info">
+					<table>
 						<tr>
-							<td style="width:50px;">Level:</td>
-							<td style='text-align:right;width:70px;' id="levelInfo"></td>
-						</tr/>
-						<tr>
-							<td>Bomben:</td>
-							<td style="text-align:right" id="bombsInfo"></td>
+							<td>Level:</td>
+							<td id="levelInfo"></td>
 						</tr>
 						<tr>
-							<td>Punkte:</td>
-							<td style="text-align:right" id="pointsInfo"></td>
+							<td>Bombs:</td>
+							<td id="bombsInfo"></td>
+						</tr>
+						<tr>
+							<td>Points:</td>
+							<td id="pointsInfo"></td>
 						</tr>
 						<tr>
 							<td colspan="2">&nbsp;</td>
 						</tr>
 						<tr>
-							<td colspan='2'>
-								<input type="button" id="newGame" value="Neues Spiel">
+							<td colspan="2">
+								<input type="button" id="newGame" value="New Game">
 							</td>
 						</tr>
 						<tr>
-							<td colspan='2' id="gameOver" style='padding-top:50px;color:#FF0000;vertical-align:center;'></td>
+							<td colspan="2" id="gameOver"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 		</table>
 
-		<script type="module" src="app/main.js"></script>
+		<script type="text/javascript" src="lib/threejs_90/three.min.js"></script>
+
+		<script type="text/javascript" src="app/controller/controller.js"></script>
+		<script type="text/javascript" src="app/model/blockdestroyer.js"></script>
+		<script type="text/javascript" src="app/view/view2D.js"></script>
+		<script type="text/javascript" src="app/view/view3D.js"></script>
+
+		<script type="text/javascript" src="app/main.js"></script>
 	</body>
 </html>
