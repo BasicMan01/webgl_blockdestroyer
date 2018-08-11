@@ -1,6 +1,6 @@
-(function () {
-	'use strict';
+import Blockdestroyer from '../app/model/blockdestroyer.js';
 
+(function () {
 	QUnit.test('Blockdestroyer.calculatePointsByBlockCount(value)', function(assert) {
 		var bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
 

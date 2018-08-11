@@ -1,6 +1,9 @@
-var Controller = (function() {
-	'use strict';
+import Blockdestroyer from '../model/blockdestroyer.js';
 
+import View2D from '../view/view2D.js';
+import View3D from '../view/view3D.js';
+
+var Controller = (function() {
 	var Controller = function() {
 		var self = this;
 		var urlParams = new URLSearchParams(window.location.search);
@@ -47,3 +50,5 @@ var Controller = (function() {
 
 	return Controller;
 }());
+
+export default Controller;

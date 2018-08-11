@@ -1,6 +1,6 @@
-var View3D = (function() {
-	'use strict';
+import * as THREE from '../../lib/threejs_95/three.module.js';
 
+var View3D = (function() {
 	var View = function(model) {
 		this.model = model;
 
@@ -158,3 +158,5 @@ var View3D = (function() {
 
 	return View;
 }());
+
+export default View3D;

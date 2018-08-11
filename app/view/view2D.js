@@ -1,6 +1,4 @@
 var View2D = (function() {
-	'use strict';
-
 	var View = function(model) {
 		this.model = model;
 
@@ -45,21 +43,21 @@ var View2D = (function() {
 	View.prototype.show = function() {
 		var html = [];
 
-		html[html.length] = "<table cellspacing='0' cellpadding='0' border='1'>";
+		html[html.length] = '<table cellspacing="0" cellpadding="0" border="1">';
 
 		for(var y = this.model.blocks.length - 1; y >= 0; y--) {
-			html[html.length] = "<tr>";
+			html[html.length] = '<tr>';
 
 			for(var x = 0; x < this.model.blocks[y].length; x++) {
-				html[html.length] = "<td data-x='" + x + "' data-y='" + y + "' ";
-				html[html.length] = "style='width:50px; height:50px; background-color:#" + this.colors[this.model.blocks[y][x]+1] + ";'>&nbsp;</td>";
+				html[html.length] = '<td data-x="' + x + '" data-y="' + y + '" ';
+				html[html.length] = 'style="width:50px; height:50px; background-color:#' + this.colors[this.model.blocks[y][x]+1] + ';">&nbsp;</td>';
 			}
 
-			html[html.length] = "</tr>";
+			html[html.length] = '</tr>';
 		}
-		html[html.length] = "</table>";
+		html[html.length] = '</table>';
 
-		document.getElementById('gameArea').innerHTML = html.join("");
+		document.getElementById('gameArea').innerHTML = html.join('');
 		document.getElementById('bombsInfo').innerHTML = this.model.bombs;
 		document.getElementById('levelInfo').innerHTML = this.model.level;
 		document.getElementById('pointsInfo').innerHTML = this.model.points;
@@ -73,3 +71,5 @@ var View2D = (function() {
 
 	return View;
 }());
+
+export default View2D;
