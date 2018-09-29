@@ -41,7 +41,7 @@ class Blockdestroyer {
 		for (let y = 0; y < this.sizeY; y++) {
 			this.blocks[y] = [];
 
-			for (var x = 0; x < this.sizeX; x++) {
+			for (let x = 0; x < this.sizeX; x++) {
 				this.blocks[y][x] = Math.floor(Math.random() * 100) % 4;
 			}
 		}
