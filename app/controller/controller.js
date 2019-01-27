@@ -1,54 +1,114 @@
+import Sound from '../../lib/rdo/sound.js';
+import Config from '../model/config.js';
+import Highscore from '../model/highscore.js';
+import Options from '../model/options.js';
 import Blockdestroyer from '../model/blockdestroyer.js';
+import View from '../view/view.js';
 
-import View2D from '../view/view2D.js';
-import View3D from '../view/view3D.js';
+class Controller {
+	constructor() {
+		this.sound = new Sound();
 
-var Controller = (function() {
-	var Controller = function() {
-		var self = this;
-		var urlParams = new URLSearchParams(window.location.search);
+		this.config = new Config();
+		this.config.load(this.init.bind(this));
+	}
 
-		this.model = new Blockdestroyer({sizeX: 10, sizeY: 10});
+	init() {
+		this.highscore = new Highscore();
+		this.options = new Options(this.config);
+		this.blockdestroyer = new Blockdestroyer();
 
-		if (urlParams.get('mode') === '3D') {
-			this.view = new View3D(this.model);
+		this.view = new View(this.config, {
+			'options': this.options,
+			'highscore': this.highscore,
+			'blockdestroyer': this.blockdestroyer
+		});
 
-			document.getElementById('tab2D').className = 'tab';
-			document.getElementById('tab3D').className = 'tab active';
+		// navigation
+		this.view.addCallback('navToGameAction', this.navToGameAction.bind(this));
+		this.view.addCallback('navToHighscoreAction', this.navToHighscoreAction.bind(this));
+		this.view.addCallback('navToMenuAction', this.navToMenuAction.bind(this));
+		this.view.addCallback('navToOptionsAction', this.navToOptionsAction.bind(this));
+		// highscore
+		this.view.addCallback('saveNameToHighscoreAction', this.saveNameToHighscoreAction.bind(this));
+		this.view.addCallback('applyNameToHighscoreAction', this.applyNameToHighscoreAction.bind(this));
+		this.view.addCallback('resetHighscoreAction', this.resetHighscoreAction.bind(this));
+		// options
+		this.view.addCallback('setMusicAction', this.setMusicAction.bind(this));
+		this.view.addCallback('nextLanguageAction', this.nextLanguageAction.bind(this));
+		this.view.addCallback('previousLanguageAction', this.previousLanguageAction.bind(this));
+		// game
+		this.view.addCallback('removeBlockAction', this.removeBlockAction.bind(this));
+	}
+
+	navToGameAction() {
+		this.blockdestroyer.newGame();
+		this.view.showGameView();
+	}
+
+	navToHighscoreAction() {
+		this.view.showHighscoreView();
+	}
+
+	navToMenuAction() {
+		this.view.showMenuView();
+	}
+
+	navToOptionsAction() {
+		this.view.showOptionsView();
+	}
+
+	saveNameToHighscoreAction() {
+		this.highscore.save();
+	}
+
+	applyNameToHighscoreAction(args) {
+		this.highscore.applyName(args.content);
+	}
+
+	resetHighscoreAction() {
+		this.highscore.reset();
+	}
+
+	setMusicAction() {
+		this.options.music = !this.options.music;
+
+		if (this.options.music) {
+			this.sound.play('resources/music/track_01.mp3');
 		} else {
-			this.view = new View2D(this.model);
-
-			document.getElementById('tab2D').className = 'tab active';
-			document.getElementById('tab3D').className = 'tab';
+			this.sound.stop();
 		}
+	}
 
-		this.view.bindHandler('newGame', function() {
-			self.newGame();
-		});
+	nextLanguageAction() {
+		this.options.setNextLanguage();
 
-		this.view.bindHandler('triggerBlock', function(x, y) {
-			self.triggerBlock(x, y);
-		});
+		this.config.loadLanguageFile(
+			this.options.language,
+			this.view.updateTextures.bind(this.view)
+		);
+	}
 
-		this.view.show();
-	};
+	previousLanguageAction() {
+		this.options.setPreviousLanguage();
 
-	Controller.prototype.newGame = function() {
-		this.model.newGame();
-		this.view.show();
-	};
+		this.config.loadLanguageFile(
+			this.options.language,
+			this.view.updateTextures.bind(this.view)
+		);
+	}
 
-	Controller.prototype.triggerBlock = function(x, y) {
-		var canMove = this.model.canMove();
+	removeBlockAction(args) {
+		if (this.blockdestroyer.canMove()) {
+			this.blockdestroyer.triggerBlock(parseInt(args.x), parseInt(args.y));
 
-		if(canMove) {
-			this.model.triggerBlock(parseInt(x), parseInt(y));
+			if (!this.blockdestroyer.canMove()) {
+				this.highscore.initNewEntry(this.blockdestroyer.level, this.blockdestroyer.points);
+
+				this.navToHighscoreAction();
+			}
 		}
-
-		this.view.show();
-	};
-
-	return Controller;
-}());
+	}
+}
 
 export default Controller;

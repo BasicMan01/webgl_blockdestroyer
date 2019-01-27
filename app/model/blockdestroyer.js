@@ -5,6 +5,10 @@ class Blockdestroyer {
 		this.sizeX = config.sizeX || 10;
 		this.sizeY = config.sizeY || 10;
 
+		this.level = 0;
+		this.points = 0;
+		this.bombs = 0;
+
 		this.blocks = [];
 
 		this.newGame();

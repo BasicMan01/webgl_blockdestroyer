@@ -1,5 +1,5 @@
-import Controller from './controller/controller.js'
+import Controller from './controller/controller.js';
 
-document.addEventListener('DOMContentLoaded', function() {
-	var controller = new Controller();
+document.addEventListener('DOMContentLoaded', () => {
+	let controller = new Controller();
 });

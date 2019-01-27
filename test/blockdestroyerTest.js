@@ -2,7 +2,7 @@ import Blockdestroyer from '../app/model/blockdestroyer.js';
 
 (function () {
 	QUnit.test('Blockdestroyer.calculatePointsByBlockCount(value)', function(assert) {
-		var bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
+		let bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
 
 		assert.equal(bd.calculatePointsByBlockCount(-1), 0, '-1 => 0 points');
 		assert.equal(bd.calculatePointsByBlockCount(0), 0, '0 => 0 points');
@@ -13,7 +13,7 @@ import Blockdestroyer from '../app/model/blockdestroyer.js';
 	});
 
 	QUnit.test('Blockdestroyer.isSingleBlock(x, y)', function(assert) {
-		var bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
+		let bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
 
 		bd.blocks = [
 			[3, 1, 1],
@@ -28,7 +28,7 @@ import Blockdestroyer from '../app/model/blockdestroyer.js';
 	});
 
 	QUnit.test('Blockdestroyer.remove(x, y, block[y][x], 0)', function(assert) {
-		var bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
+		let bd = new Blockdestroyer({sizeX: 3, sizeY: 3});
 
 		bd.blocks = [
 			[3, 1, 1],
