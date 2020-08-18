@@ -1,3 +1,5 @@
+import * as THREE from '../../../lib/threejs_119/build/three.module.js';
+
 import helper from '../../../lib/rdo/helper.js';
 
 import BaseView from './baseView.js';
@@ -71,7 +73,7 @@ class GameView extends BaseView {
 		} else if (this.container.rotation.x < -Math.PI / 2) {
 			this.container.rotation.x = -Math.PI / 2;
 		}
-		
+
 		if (this.container.scale.x < 2) {
 			this.container.scale.set(2, 2, 2);
 		} else if (this.container.scale.x > 4) {
@@ -84,12 +86,12 @@ class GameView extends BaseView {
 
 		this.readjustLimit();
 	}
-	
+
 	scaleGameBoard(val) {
 		this.container.scale.x += val;
 		this.container.scale.y += val;
 		this.container.scale.z += val;
-		
+
 		this.readjustLimit();
 	}
 
@@ -99,7 +101,7 @@ class GameView extends BaseView {
 
 	updateTextures() {
 		let texts = this.mainView.config.texts;
-		
+
 		this.mainView.fontTexture.setTextureToObject(
 			this.navToMenuButton,
 			{text: '\u25C4 ' + texts.navigationMenu, x: -16, y: -13, opacity: 0.2, scale: 2, align: 'left'}

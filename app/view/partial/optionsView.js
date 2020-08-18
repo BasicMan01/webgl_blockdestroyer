@@ -1,3 +1,5 @@
+import * as THREE from '../../../lib/threejs_119/build/three.module.js';
+
 import BaseView from './baseView.js';
 
 class OptionsView extends BaseView {

@@ -1,3 +1,5 @@
+import * as THREE from '../../../lib/threejs_119/build/three.module.js';
+
 import helper from '../../../lib/rdo/helper.js';
 
 import BaseView from './baseView.js';
