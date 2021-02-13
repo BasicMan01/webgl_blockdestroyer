@@ -1,4 +1,4 @@
-import * as THREE from '../../../lib/threejs_119/build/three.module.js';
+import * as THREE from '../../../lib/threejs_125/build/three.module.js';
 
 import helper from '../../../lib/rdo/helper.js';
 
@@ -31,7 +31,7 @@ class GameView extends BaseView {
 	}
 
 	createObjects() {
-		let geometryBlock = new THREE.CubeGeometry(1, 1, 1);
+		let geometryBlock = new THREE.BoxGeometry(1, 1, 1);
 
 		this.navToMenuButton = this.mainView.addTextBasePlane(this.scene);
 		this.textLabelLevel = this.mainView.addTextBasePlane(this.scene);
